@@ -1,17 +1,3 @@
-.github
-
-# testes
-pegs/
-peg.rb
-saida.txt
-
-# material externo
-peg.pdf
-
-.#peg.lisp
-
-_darcs/
-
 *.FASL
 *.fasl
 *.lisp-temp
