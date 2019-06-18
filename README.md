@@ -14,5 +14,6 @@ Usage:
   (with-peg-parse "mypeg" (file-string "file.txt"))
 
 Known bugs:
-- Cannot parse ranges and classes (e.g.: [a-z]):
-- Prints values instead of returning them (and the printed info is not particularly useful).
+- Cannot parse ranges and classes (e.g.: [a-z]);
+- No error recovery;
+- Lack of tests.

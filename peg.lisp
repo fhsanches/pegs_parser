@@ -46,8 +46,8 @@
       (try (parsed-value-action root)))))
 
 (defun generate-parser (text)
-  "Returns a hash table with parsing rules.
-   Keys: rule names. Values: lambda expressions."
+  "Input: a PEG.
+   Output: a hash table with parsing rules. Keys: rule names. Values: lambda expressions."
   (let* ((*pos* 0)
      (*text* text)
      (rules (make-hash-table :test 'equal)))
@@ -184,9 +184,7 @@
          (g-class 'g-class-action-here) ;TODO
          (dot (lambda () (match (lambda (any) t))))
          (literal (lambda () (match-string (parsed-value-value value))))
-         (t (format t "primary value type: ~a~%" (parsed-value-type value))))))))
-;;(t t))))))
-
+         (t (list value)))))))
 
 ;; the "class" variable is named "g-class" to avoid conflicts w/ CLOS
 (defun g-class ()
@@ -460,15 +458,15 @@
   (mapcar #'applyf funlist))
 
 (defun try (funform)
-  "applies a function with its arguments, resets pos if function returns nil
-returns que function's return value (nil if it fails)"
+  "applies a parsing function with its arguments, resets pos if function returns nil
+returns que parsing return value (nil if it fails)"
   (let ((init-pos *pos*)
-    (res (applyf funform)))
+        (res (applyf funform)))
     (if res
-    res
-    (progn
-      (setf *pos* init-pos)
-      nil))))
+        res
+        (progn
+          (setf *pos* init-pos)
+          nil))))
 
 (defun optional (funform)
   (try funform))
