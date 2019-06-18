@@ -1,0 +1,20 @@
+# Simple calculator
+Expression <- Term ((PLUS / MINUS)  Term)*
+Term       <- Factor ((TIMES / DIV) Factor)*
+Factor     <- Base '^' Factor / Base
+Base       <- Number / OPEN Expression CLOSE / '-' Base
+
+DIV        <- '/' Spacing
+TIMES      <- '*' Spacing
+MINUS      <- '-' Spacing
+PLUS       <- '+' Spacing
+OPEN       <- '(' Spacing
+CLOSE      <- ')' Spacing
+Number     <- (Integer Decimal / Integer / Decimal) Spacing
+Integer    <- [0-9]+
+Decimal    <- '.' [0-9]+
+
+Spacing    <- (Space / Comment)*
+Comment    <- '#' (!EndOfLine .)* EndOfLine
+Space      <- ' ' / '\t' / EndOfLine
+EndOfLine  <- '\r\n' / '\n' / '\r'

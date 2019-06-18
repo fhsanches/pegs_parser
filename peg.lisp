@@ -1,3 +1,6 @@
+;; usage example
+(with-peg-parse "calc" "(1+1-4)")
+
 (defvar spaces-list '(#\Space #\Newline #\Backspace #\Tab #\Linefeed #\Page #\Return #\Rubout))
 (defparameter *pos* 0)
 (defparameter *text* "")
